@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Inspirating Person</string>
+    <string name="btnAddPerson">Add new person</string>
+</resources>
