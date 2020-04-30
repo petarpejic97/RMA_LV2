@@ -9,27 +9,36 @@ import android.util.Log
 
 class MainActivity : AppCompatActivity() {
     private var mOnButtonClicked: OnButtonClicked? = null
-    private var mSubmitCache: String? = null
+    private var onLongTouch : OnLongTouch ?= null
+    private var updataId : Int = 0
 
     interface OnButtonClicked {
-        fun submit(s: String?)
+        fun refresh()
+    }
+    fun setOnButtonClicked(c: OnButtonClicked) {
+        Log.w("USAO","USAO 1")
+        mOnButtonClicked = c
+        c.refresh()
+
+    }
+    fun refreshData() {
+        Log.w("USAO","USAO 2")
+        mOnButtonClicked!!.refresh()
+        viewPager.currentItem=0
     }
 
-    fun setOnButtonClicked(c: OnButtonClicked) {
-        mOnButtonClicked = c
-        // deliver cached string, if any
-        if (TextUtils.isEmpty(mSubmitCache) == false) {
-            c.submit(mSubmitCache)
-        }
+    interface OnLongTouch{
+        fun setFieldsForUpdate(id : Int)
     }
-    fun buttonClicked(s: String) {
-        Log.w("USAO",s)
-        if (mOnButtonClicked == null) {
-            // if FragmentB doesn't exist jet, cache value
-            mSubmitCache = s
-            return
-        }
-        mOnButtonClicked!!.submit(s)
+
+    fun setOnUpdating(c : OnLongTouch){
+        onLongTouch = c
+        c.setFieldsForUpdate(updataId)
+    }
+
+    fun getUpdataId(id : Int){
+        onLongTouch?.setFieldsForUpdate(id)
+        viewPager.currentItem=1
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

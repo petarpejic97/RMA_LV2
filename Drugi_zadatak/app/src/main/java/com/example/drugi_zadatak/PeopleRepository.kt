@@ -1,12 +1,6 @@
 package com.example.drugi_zadatak
 
-
-import android.os.Build
-import androidx.annotation.RequiresApi
-import androidx.recyclerview.widget.RecyclerView
-
 object PeopleRepository {
-    lateinit var peopleDisplay: RecyclerView
 
     val persons: MutableList<InspiringPerson>
     init {
@@ -49,6 +43,6 @@ object PeopleRepository {
         persons.add(person)
     }
     fun update(person2: InspiringPerson) {
-        persons.set(person2.id-1,person2)
+        persons[person2.id-1] = person2
     }
 }

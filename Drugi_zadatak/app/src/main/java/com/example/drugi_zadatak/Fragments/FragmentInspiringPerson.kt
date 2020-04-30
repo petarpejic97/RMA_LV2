@@ -26,7 +26,8 @@ class FragmentInspiringPerson : Fragment(), MainActivity.OnButtonClicked {
     lateinit var peopleDisplay: RecyclerView
     private var mMain: MainActivity? = null
 
-    override fun submit(s: String?) {
+    override fun refresh() {
+        Log.w("USAO","USAO 3")
         displayData()
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -35,7 +36,7 @@ class FragmentInspiringPerson : Fragment(), MainActivity.OnButtonClicked {
         mMain = activity as MainActivity?
         mMain?.setOnButtonClicked(this)
 
-        return rootView;
+        return rootView
     }
     private fun initView(){
         initializeRecyclerView()
@@ -44,7 +45,7 @@ class FragmentInspiringPerson : Fragment(), MainActivity.OnButtonClicked {
     private fun initializeRecyclerView(){
         peopleDisplay = rootView.findViewById(R.id.peopleDisplay)
         peopleDisplay.layoutManager = LinearLayoutManager(activity)
-        peopleDisplay.itemAnimator = DefaultItemAnimator()
+        //peopleDisplay.itemAnimator = DefaultItemAnimator()
         peopleDisplay.addItemDecoration(DividerItemDecoration(activity,RecyclerView.VERTICAL))
         displayData()
 
@@ -62,13 +63,11 @@ class FragmentInspiringPerson : Fragment(), MainActivity.OnButtonClicked {
                 (peopleDisplay.adapter as InspiringPersonAdapter).refreshData(
                     PeopleRepository.persons
                 )
+                displayData()
             }
 
             override fun updatePerson(id: Int) {
-                val id = id.toString()
-                val addnewIntent : Intent = Intent(activity, UpdatePerson::class.java)
-                addnewIntent.putExtra("id", id)
-                startActivity(addnewIntent)
+                mMain?.getUpdataId(id)
             }
         }
         peopleDisplay.adapter = InspiringPersonAdapter(
