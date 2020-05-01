@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.item_person.*
 import kotlinx.android.synthetic.main.item_person.view.*
 
 
-class FragmentInspiringPerson : Fragment(), MainActivity.OnButtonClicked {
+class FragmentInspiringPerson : Fragment(), OnClickAddListener{
     protected lateinit var rootView: View
     lateinit var peopleDisplay: RecyclerView
     private var mMain: MainActivity? = null

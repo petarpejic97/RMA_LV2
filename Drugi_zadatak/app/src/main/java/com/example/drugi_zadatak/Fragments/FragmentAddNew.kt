@@ -18,7 +18,7 @@ import com.example.drugi_zadatak.MainActivity
 import com.example.drugi_zadatak.PeopleRepository
 import com.example.drugi_zadatak.R
 
-class FragmentAddNew : Fragment(),MainActivity.OnLongTouch {
+class FragmentAddNew : Fragment(),OnLongTouchListener {
     protected lateinit var rootView: View
     lateinit var btnAdd: Button
     private var mMain: MainActivity? = null

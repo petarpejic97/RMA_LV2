@@ -5,17 +5,16 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
 import android.text.TextUtils
 import android.util.Log
+import com.example.drugi_zadatak.Fragments.OnClickAddListener
+import com.example.drugi_zadatak.Fragments.OnLongTouchListener
 
 
 class MainActivity : AppCompatActivity() {
-    private var mOnButtonClicked: OnButtonClicked? = null
-    private var onLongTouch : OnLongTouch ?= null
+    private lateinit var mOnButtonClicked: OnClickAddListener
+    private var onLongTouch : OnLongTouchListener ?= null
     private var updataId : Int = 0
 
-    interface OnButtonClicked {
-        fun refresh()
-    }
-    fun setOnButtonClicked(c: OnButtonClicked) {
+    fun setOnButtonClicked(c: OnClickAddListener) {
         Log.w("USAO","USAO 1")
         mOnButtonClicked = c
         c.refresh()
@@ -27,11 +26,8 @@ class MainActivity : AppCompatActivity() {
         viewPager.currentItem=0
     }
 
-    interface OnLongTouch{
-        fun setFieldsForUpdate(id : Int)
-    }
 
-    fun setOnUpdating(c : OnLongTouch){
+    fun setOnUpdating(c : OnLongTouchListener){
         onLongTouch = c
         c.setFieldsForUpdate(updataId)
     }
