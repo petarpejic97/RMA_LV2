@@ -1,5 +1,7 @@
 package com.example.drugi_zadatak
 
+import android.util.Log
+
 object PeopleRepository {
 
     val persons: MutableList<InspiringPerson>
@@ -43,6 +45,18 @@ object PeopleRepository {
         persons.add(person)
     }
     fun update(person2: InspiringPerson) {
-        persons[person2.id-1] = person2
+        val index : Int? = findIndex(person2)
+
+        persons[index!!] = person2
+    }
+
+    private fun findIndex(person : InspiringPerson): Int? {
+        var index : Int ?=null
+        for(i in 0 until persons.size){
+            if(persons[i].id == person.id){
+                index = i
+            }
+        }
+        return index
     }
 }

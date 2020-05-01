@@ -7,8 +7,8 @@ import com.example.drugi_zadatak.Fragments.FragmentInspiringPerson
 class HandsomeAdapter(fragmentManager: androidx.fragment.app.FragmentManager) :  FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     val fragments = arrayOf(
-        FragmentInspiringPerson(),
-        FragmentAddNew()
+        FragmentInspiringPerson.newInstance(),
+        FragmentAddNew.newInstance()
     )
     val titles = arrayOf("Inspiring person", "Add new ")
     override fun getItem(position: Int): Fragment {

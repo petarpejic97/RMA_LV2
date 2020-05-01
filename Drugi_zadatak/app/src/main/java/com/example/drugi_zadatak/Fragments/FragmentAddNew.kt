@@ -25,6 +25,12 @@ class FragmentAddNew : Fragment(),OnLongTouchListener {
     var updateFlag = false
     var updatePersonId = 0
 
+    companion object {
+        fun newInstance(): FragmentAddNew{
+            return FragmentAddNew()
+        }
+    }
+
     override fun setFieldsForUpdate(id:Int){
         fillFields(id)
     }
@@ -79,7 +85,7 @@ class FragmentAddNew : Fragment(),OnLongTouchListener {
                 if(i == 0)
                     statements+=person.statements[i]
                 else
-                    statements+=","+person.statements[i]
+                    statements+="|"+person.statements[i]
             }
             rootView.edFullname.text = Editable.Factory.getInstance().newEditable(person.fullName)
             rootView.edBirth.text = Editable.Factory.getInstance().newEditable(person.birth)

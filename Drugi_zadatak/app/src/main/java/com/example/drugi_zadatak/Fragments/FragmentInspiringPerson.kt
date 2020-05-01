@@ -26,6 +26,11 @@ class FragmentInspiringPerson : Fragment(), OnClickAddListener{
     lateinit var peopleDisplay: RecyclerView
     private var mMain: MainActivity? = null
 
+    companion object {
+        fun newInstance(): FragmentInspiringPerson{
+            return FragmentInspiringPerson()
+        }
+    }
     override fun refresh() {
         Log.w("USAO","USAO 3")
         displayData()
@@ -33,11 +38,15 @@ class FragmentInspiringPerson : Fragment(), OnClickAddListener{
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_inspiring_person, container, false)
         initView()
-        mMain = activity as MainActivity?
-        mMain?.setOnButtonClicked(this)
-
+        initMain()
         return rootView
     }
+
+    private fun initMain() {
+        mMain = activity as MainActivity?
+        mMain?.setOnButtonClicked(this)
+    }
+
     private fun initView(){
         initializeRecyclerView()
     }
@@ -45,8 +54,9 @@ class FragmentInspiringPerson : Fragment(), OnClickAddListener{
     private fun initializeRecyclerView(){
         peopleDisplay = rootView.findViewById(R.id.peopleDisplay)
         peopleDisplay.layoutManager = LinearLayoutManager(activity)
-        //peopleDisplay.itemAnimator = DefaultItemAnimator()
+        peopleDisplay.itemAnimator = DefaultItemAnimator()
         peopleDisplay.addItemDecoration(DividerItemDecoration(activity,RecyclerView.VERTICAL))
+
         displayData()
 
     }
@@ -63,7 +73,6 @@ class FragmentInspiringPerson : Fragment(), OnClickAddListener{
                 (peopleDisplay.adapter as InspiringPersonAdapter).refreshData(
                     PeopleRepository.persons
                 )
-                displayData()
             }
 
             override fun updatePerson(id: Int) {
