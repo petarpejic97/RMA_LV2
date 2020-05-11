@@ -64,17 +64,25 @@ class FragmentAddNew : Fragment(),OnLongTouchListener {
             if(updateFlag){
                 val person = InspiringPerson(updatePersonId, imglink, fullname, birth, descripton, statements)
                 addPersonInList(person)
+                resetFields()
                 updatePersonId = 0
             }
             else{
                 val id : Int = PeopleRepository.persons.size+1
                 val person = InspiringPerson(id, imglink, fullname, birth, descripton, statements)
                 addPersonInList(person)
+                resetFields()
             }
 
         }
     }
-
+    private fun resetFields(){
+        rootView.edFullname.text = Editable.Factory.getInstance().newEditable("")
+        rootView.edBirth.text = Editable.Factory.getInstance().newEditable("")
+        rootView.edDescription.text = Editable.Factory.getInstance().newEditable("")
+        rootView.edLinkImage.text = Editable.Factory.getInstance().newEditable("")
+        rootView.edStatements.text = Editable.Factory.getInstance().newEditable("")
+    }
     private fun fillFields(id : Int){
         val person = PeopleRepository.get(id)
         updatePersonId = id
